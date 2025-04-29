@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block head %}
+<a  type="submit" class="btn btn-primary btn-sm float-right" href="/logout">Log Out</a>
+{% endblock %}
+{% block body %}
+<br></br>
+
+<title>Employee - Sourceinfi Analytics</title> 
+
+
+{% if u %} 
+    <br></br>
+    <div style="text-align: center;"> 
+
+    {% if p['sales']==1 %} 
+    <a href="/salesapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Sales</a>
+    {% endif %}
+    {% if p['operations']==1 %}
+    <a href="/operationsapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Operations</a>
+    {% endif %}
+    {% if p['finance']==1 %}
+    <a href="/financeapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Finance</a>
+    {% endif %}
+    {% if p['vendor']==1 %}
+    <a href="/vendorapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Vendor</a> 
+    {% endif %}
+    {% if p['logistics']==1 %}
+    <a href="/logisticsapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Logistics</a> 
+    {% endif %}
+    {% if p['admin']==1 %}
+    <a href="/adminapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Admin</a> 
+    {% endif %}
+    
+    
+    </div>
+{% endif %}
+
+{% endblock %}
+
+

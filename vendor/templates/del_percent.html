@@ -1,0 +1,161 @@
+{% extends 'vendor_base.html' %} 
+
+{% block body %} 
+  
+    <h1 style="text-align:center; margin-top: 50px;">Average Product Margin</h1> 
+    <title>Average Product Margin - Vendor</title>
+
+    
+    
+    <div class="sectioncust">   
+      <div class="col-xl-6 col-lg-12">
+          <div class="card shadow mb-4" >
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 100px;">
+
+                  <form style="display:inline" method="POST" action="" enctype="multipart/form-data">   
+                      <h5 style="margin-left: 15px;"><b>Filter Order Date:</b></h5>
+
+                      <label for="Start_Date" class="col-sm-3 col-form-label" style="margin-right: 30px;">Start_Date
+                        <input type="date" name="Start_Date" id="Start_Date" placeholder="Start_Date" value= "{{Start_Date}}" /> 
+                      </label> 
+
+                      <label for="End_Date" class="col-sm-3 col-form-label" style="margin-right: 10px;">End_Date
+                        <input type="date" name="End_Date" id="End_Date" placeholder="End_Date" value= "{{End_Date}}" />
+                      </label> 
+                      
+                      <a style="display:inline;" href="/vendorapp/del_percent" class="btn btn-sm btn-info float-right" role="button">Discard</a>
+                      <input style="display:inline; margin-right: 10px;" class="btn btn-sm btn-success float-right" role="button" type="submit">
+                      
+                  </form>
+
+              </div>
+          </div> 
+      </div>
+
+      <div class="col-xl-6 col-lg-12"> 
+          <div class="card shadow mb-4" > 
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 100px;">   
+
+                  <!-- <form style="display:inline" method="POST" action="" enctype="multipart/form-data">   
+                      <h4 style="text-align: center;"><b>Track Shipment Log:</b></h4>
+
+                      <label for="AWB" class="col-sm-3 col-form-label" style="margin-right: 100px;">
+                        <input type="text" name="AWB" id="AWB" placeholder="Search AWB" value= "{{AWB}}" /> 
+                      </label> 
+  
+                      <label for="Reason" class="col-sm-3 col-form-label" style="margin-right: 10px;">
+                        <input type="text" name="Reason" id="Reason" placeholder="Reason" value= "" readonly/>  
+                      </label> 
+                      
+                      <button style="display:inline; margin-right: 10px;" class="btn btn-sm btn-success float-right" type="button" onclick="awbPost()">Submit</button>
+                      
+                  </form>      -->
+
+
+                  <form style="display:inline" method="POST" action="" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-sm-5">
+                            <h5 style="margin-left: 15px;"><b>Track Shipment Log:</b></h5> 
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label for="AWB">
+                                <input type="text" name="AWB" id="AWB" class="form-control" placeholder="Search AWB" value="{{AWB}}" />
+                            </label>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <button class="btn btn-sm btn-success" type="button" onclick="awbPost()">Submit</button>
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                      <label for="Reason" class="col-sm-12">
+                        <textarea name="Reason" id="Reason" class="form-control" rows="1" placeholder="Reason" readonly></textarea>
+                      </label>
+                    </div>
+                  </form> 
+
+              </div>
+          </div> 
+      </div>
+
+  </div>
+     
+
+
+    <div class="sectioncust" style="margin-top:30px;">   
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-info">Average Product Margin</h4>   
+                  <a style="display:inline" href="/vendorapp/del_percent_csv" class="btn btn-sm btn-success float-right" role="button">CSV</a>
+              </div>
+              <div class="card-body" style="max-height: 600px;"> 
+                  <div style="overflow: scroll; max-height: 570px;"> 
+                      {% if d1|length  %}
+                      <table class="table table-bordered table-light" id="myTable">
+
+                        <thead> 
+                          <tr>
+                            {% for col in d1col %}
+                              <th style="text-align: center;">{{col}}</th>   
+                            {% endfor %}
+                          </tr> 
+                        </thead>
+                        
+                        <tbody>
+                          {%for i in d1%}
+                              <tr>
+                                {%for k in i%}
+                                    <td>{{ k }}</td>
+                                {%endfor%}
+                              </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
+                      {% endif %}    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    
+
+
+<script>
+  
+    // datatable
+    $(document).ready( function () { 
+        $('#myTable').DataTable({ 
+        });
+
+        const menuItem = document.querySelectorAll(".mainmenu li");
+        menuItem[1].className = "active"; 
+    }); 
+    // datatable
+
+    function awbPost(){
+        var awbinput=document.getElementById('AWB').value;  
+
+        var settings = {
+            url: "/vendorapp/AWB_Search", 
+            method: "POST",
+            timeout: 0,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({
+                "AWB": awbinput, 
+            }),
+        };
+        $.ajax(settings).done(function(response) { 
+            console.log(response) 
+              $('#Reason').val(response.Reason)  
+        });
+      }
+
+</script>
+
+
+
+{% endblock %}
+

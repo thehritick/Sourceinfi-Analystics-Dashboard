@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block head %}
+<a  type="submit" class="btn btn-primary btn-sm float-right" href="/logout">Log Out</a>
+{% endblock %}
+{% block body %}
+<br></br>
+
+<title>Admin - Sourceinfi Analytics</title> 
+
+{% if u %}
+    <h2 style="text-align:center" href="/">You are logged in as Admin {{u}}</h2>
+    <br></br>
+    <div style="text-align: center;">
+
+    {% if p['sales']==1 %} 
+    <a href="/salesapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Sales</a>
+    {% endif %}
+    {% if p['operations']==1 %}
+    <a href="/operationsapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Operations</a>
+    {% endif %}
+    {% if p['finance']==1 %}
+    <a href="/financeapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Finance</a>
+    {% endif %}
+    {% if p['vendor']==1 %}
+    <a href="/vendorapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Vendor</a> 
+    {% endif %}
+    {% if p['logistics']==1 %}
+    <a href="/logisticsapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Logistics</a> 
+    {% endif %}
+    {% if p['admin']==1 %}
+    <a href="/adminapp" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Admin</a> 
+    {% endif %}
+    
+    </div>
+{% endif %}
+
+{% if d|length  %} 
+
+<div>
+    <br></br>
+    <br></br>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Type</th>
+            <th scope="col">Sales</th>
+            <th scope="col">Operations</th>
+            <th scope="col">Finance</th>
+            <th scope="col">Vendor</th>      
+            <th scope="col">Logistics</th>
+            <th scope="col">Admin</th>      
+            <th scope="col">Action</th>           
+        </tr>
+    </thead>
+    
+    <tbody>
+        
+        {%for i in d%}
+            <tr>
+                <td>{{ i[1] }}</td> 
+                <td>{{ i[2]}}</td>
+                <td>{{ i[4] }}</td>
+              
+                {% if i[5]['sales']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                {% if i[5]['operations']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                {% if i[5]['finance']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                {% if i[5]['vendor']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                {% if i[5]['logistics']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                {% if i[5]['admin']== 1 %}  
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {% else %}
+                <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" > 
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                  </label>
+                </div>
+                </td>
+                {%endif%}               
+
+
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <a class="btn btn-warning btn-xs" href='/admin/editemployee/{{ i[2] }}'>Edit</a>
+                      <a class="btn btn-danger btn-xs" style="margin-left: 10px;" href='/admin/delete_employee/{{ i[2] }}'>Delete</a>
+                    </div>
+                </td>
+              
+              
+                
+            </tr>
+        {%endfor%}
+        
+        
+      </tbody>
+
+
+
+{% endif %}
+{% endblock %}
+
+

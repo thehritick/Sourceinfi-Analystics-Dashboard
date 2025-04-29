@@ -1,0 +1,158 @@
+{% extends 'admin_base.html' %}
+
+{% block body %}
+
+    <h1 style="text-align:center; margin-top: 50px;">Growth Report</h1> 
+    <title>Growth Report - Admin</title>
+
+
+    <div class="sectioncust"> 
+      <div class="col-xl-12 col-lg-12"> 
+          <div class="card shadow mb-4" > 
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 100px;">
+
+                  <form style="display:inline" method="POST" action="" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 style="margin-left: 15px;"><b>Previous Month Shipment Date:</b></h5> 
+                  
+                        <label style="margin-left: 15px; color: red;" for="PM_Start_Date" class="col-form-label" style="margin-right: 30px;">PM_Start_Date
+                          <input type="date" name="PM_Start_Date" id="PM_Start_Date" placeholder="PM_Start_Date" value="{{PM_Start_Date}}" /> 
+                        </label> 
+                  
+                        <label style="margin-left: 15px; color: red;" for="PM_End_Date" class="col-form-label" style="margin-right: 10px;">PM_End_Date
+                          <input type="date" name="PM_End_Date" id="PM_End_Date" placeholder="PM_End_Date" value="{{PM_End_Date}}" />
+                        </label> 
+                      </div>
+                      
+                      <div class="col-sm-3">
+                        <h5 style="margin-left: 15px;"><b>Current Month Shipment Date:</b></h5> 
+                  
+                        <label style="margin-left: 15px; color: green;" for="CM_Start_Date" class="col-form-label" style="margin-right: 30px;">CM_Start_Date
+                          <input type="date" name="CM_Start_Date" id="CM_Start_Date" placeholder="CM_Start_Date" value="{{CM_Start_Date}}" /> 
+                        </label> 
+                  
+                        <label style="margin-left: 15px; color: green;" for="CM_End_Date" class="col-form-label" style="margin-right: 10px;">CM_End_Date
+                          <input type="date" name="CM_End_Date" id="CM_End_Date" placeholder="CM_End_Date" value="{{CM_End_Date}}" /> 
+                        </label> 
+                      </div>
+                  
+                      <div class="col-sm-1">
+                        <input style="margin-left: 10px;" class="btn btn-sm btn-success float-right" role="button" type="submit"> 
+                        <a style="margin-left: 10px; margin-top: 10px;" href="/adminapp/growth_report" class="btn btn-sm btn-info float-right" role="button">Discard</a>
+                      </div>
+
+                      <div class="col-sm-3"> 
+                        <label style="margin-left: 50px; font-size: 18px;" class="col-form-label">Overall GOLM  
+                        <h1 style="color: blue; text-align: center;">{{zz}}</h1> 
+                        </label>
+                      </div>
+
+                      <div class="col-sm-2"> 
+                        <!-- <a style="margin-left: 10px; margin-top: 10px;" href="/adminapp/growth_report" class="btn btn-danger float-right" role="button" onclick="myFunction()">Shoot E-Mail</a> -->
+                        <button class="btn btn-danger" onclick="myFunction()">Shoot E-Mail</button> 
+                        <p id="demo"></p> 
+                      </div>
+
+                    </div>
+                  </form>
+
+                  
+              </div>
+          </div> 
+      </div>
+
+  </div>
+
+
+
+  <script> 
+    function myFunction() {
+      let text = "Send Growth Analysis Report through E-Mail.";  
+      if (confirm(text) == true) {
+
+      $(document).ready(function() { 
+      $.ajax({
+              url: '/adminapp/send_email',   
+              type: 'GET',
+              async: true,
+              dataType: "json",
+              success: function (data) {
+              }
+              });  
+      }); 
+
+        text = "E-Mail Sent!";
+        event.preventDefault();  // Prevent the default action (page loading) 
+
+      } else {
+        text = "E-Mail Rejected!"; 
+        event.preventDefault();  // Prevent the default action (page loading) 
+      } 
+      document.getElementById("demo").innerHTML = text; 
+    }
+  </script> 
+
+
+
+
+    <div class="sectioncust" style="margin-top:30px;"> 
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-info">Growth Report</h4>   
+                  <a style="display:inline" href="/adminapp/growth_report_csv" class="btn btn-sm btn-success float-right" role="button">CSV</a>
+              </div>
+              <div class="card-body" style="max-height: 600px;"> 
+                  <div style="overflow: scroll; max-height: 570px;">
+                      {% if d1|length  %}
+                      <table class="table table-bordered table-light" id="myTable"> 
+
+                        <thead>
+                          <tr>
+                            {% for col in d1col %}
+                            <th style="text-align: center;">{{col}}</th>   
+                            {% endfor %}
+                          </tr> 
+                        </thead>
+                        
+                        <tbody>
+                          {%for i in d1%}
+                              <tr>
+                                {%for k in i%}
+                                    <td>{{ k }}</td>
+                                {%endfor%}
+                              </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
+                      {% endif %}    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    
+
+
+<script> 
+
+  // datatable
+  $(document).ready( function () { 
+      $('#myTable').DataTable({ 
+      });
+
+      const menuItem = document.querySelectorAll(".mainmenu li");
+      menuItem[2].className = "active"; 
+  }); 
+  // datatable
+
+</script>
+
+
+
+{% endblock %}
+
+
+
+

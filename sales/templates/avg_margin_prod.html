@@ -1,0 +1,97 @@
+{% extends 'sales_base.html' %}
+
+{% block body %}
+
+    <h1 style="text-align:center; margin-top: 50px;">Average Product Margin</h1> 
+    <title>Average Product Margin - Sales</title>
+
+
+    <div class="sectioncust"> 
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4" >
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 100px;">
+
+                  <form style="display:inline" method="POST" action="" enctype="multipart/form-data">   
+                    <h5 style="margin-left: 15px;"><b>Filter Order Date:</b></h5>
+
+                      <label for="Start_Date" class="col-sm-3 col-form-label" style="margin-right: 30px;">Start_Date
+                        <input type="date" name="Start_Date" id="Start_Date" placeholder="Start_Date" value= "{{Start_Date}}" /> 
+                      </label> 
+
+                      <label for="End_Date" class="col-sm-3 col-form-label" style="margin-right: 10px;">End_Date
+                        <input type="date" name="End_Date" id="End_Date" placeholder="End_Date" value= "{{End_Date}}" />
+                      </label> 
+
+                      <a style="display:inline;" href="/salesapp/avg_margin_prod" class="btn btn-sm btn-info float-right" role="button">Discard</a>
+                      <input style="display:inline; margin-right: 10px;" class="btn btn-sm btn-success float-right" role="button" type="submit">
+                      
+                  </form>
+              </div>
+          </div> 
+      </div>
+  </div>
+
+
+
+
+
+    <div class="sectioncust" style="margin-top:30px;">  
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-info">Average Product Margin</h4> 
+                  <a style="display:inline" href="/salesapp/avg_margin_prod_csv" class="btn btn-sm btn-success float-right" role="button">CSV</a>
+              </div>
+              <div class="card-body" style="max-height: 600px;"> 
+                  <div style="overflow: scroll; max-height: 570px;">
+                      {% if d1|length  %}
+                      <table class="table table-bordered table-light" id="myTable"> 
+
+                        <thead>
+                          <tr>
+                            {% for col in d1col %}
+                            <th style="text-align: center;">{{col}}</th>   
+                            {% endfor %}
+                          </tr> 
+                        </thead>
+                        
+                        <tbody>
+                          {%for i in d1%}
+                              <tr>
+                                {%for k in i%}
+                                    <td>{{ k }}</td>
+                                {%endfor%}
+                              </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
+                      {% endif %}    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    
+
+
+<script>
+
+  // datatable
+  $(document).ready( function () { 
+      $('#myTable').DataTable({ 
+      });
+
+      const menuItem = document.querySelectorAll(".mainmenu li");
+      menuItem[3].className = "active"; 
+  }); 
+  // datatable
+
+</script>
+
+
+
+{% endblock %}
+
+
+
+

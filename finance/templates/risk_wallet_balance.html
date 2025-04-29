@@ -1,0 +1,78 @@
+{% extends 'finance_base.html' %}
+
+{% block body %}
+
+    <h1 style="text-align:center; margin-top: 50px;">Risk Wallet Balance</h1> 
+    <title>Risk Wallet Balance - Finance</title> 
+
+
+<div class="sectioncust" style="margin-top:30px;"> 
+  <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h4 class="m-0 font-weight-bold text-info">Risk Wallet Balance</h4> 
+              <a style="display:inline" href="/financeapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a>
+          </div>
+          <div class="card-body" style="max-height: 600px;"> 
+            <div style="overflow: scroll; max-height: 570px;">
+              {% if d1|length  %}
+              <table class="table table-bordered table-light">
+
+                <thead>
+                  <tr>
+                    {% for col in d1col %}
+                    <th style="text-align: center;">{{col}}</th>   
+                    {% endfor %}
+                  </tr> 
+                </thead>
+                
+                <tbody>
+                  {%for i in d1%}
+                      <tr>
+                        {%for k in i%}
+                            <td>{{ k }}</td>
+                        {%endfor%}
+                      </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+              {% endif %}    
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<script>
+  
+  // datatable
+  $(document).ready( function () { 
+      $('#myTable').DataTable({ 
+      });
+
+      const menuItem = document.querySelectorAll(".mainmenu li");
+      menuItem[4].className = "active"; 
+  }); 
+  // datatable
+
+</script>
+
+
+
+
+
+
+
+
+
+    
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,542 @@
+{% extends 'admin_base.html' %}
+
+{% block body %}
+
+    <h1 style="text-align:center; margin-top: 50px;">Admin Dashboard - From Last 7 Days</h1> 
+    <title>Dashboard - Admin</title>
+
+
+  <div class="sectioncust" style="margin-top:30px;"> 
+
+      <div class="col-lg-6" id="order_vs_ships" ></div>  
+      <div class="col-lg-6" id="cod_pre" ></div>  
+      <div class="col-lg-6" id="top_sellers" style="margin-top:50px;"></div> 
+      <div class="col-lg-6" id="top_vendors" style="margin-top:50px;"></div> 
+      <div class="col-lg-6" id="top_couriers" style="margin-top:50px;"></div> 
+      <div class="col-lg-6" id="top_cities" style="margin-top:50px;"></div> 
+      <div class="col-lg-6" id="top_products" style="margin-top:50px;"></div>   
+
+  </div> 
+
+  <style>
+        @import "https://code.highcharts.com/css/highcharts.css"; 
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <script src="https://code.highcharts.com/modules/drilldown.js"></script> 
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script> 
+
+  <script>
+
+
+  $(document).ready(function() {  
+      order_vs_ships();
+      cod_pre();
+      top_sellers();
+      top_vendors();
+      top_couriers();
+      top_cities();
+      top_products();
+    });
+
+
+  // top_sellers // 
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/top_sellers',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           top_sellers(data);
+  //         }
+  //         });  
+  // });
+
+  function top_sellers () { 
+
+    $.ajax({
+        url: '/adminapp/top_sellers',  
+        type: 'GET',
+        async: true,
+        crossDomain: true, 
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('top_sellers', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Top 10 Sellers'
+    },
+
+    xAxis: {
+        categories: data.Name, 
+    },
+
+    yAxis: [{ 
+        title: {
+            text: 'Shipments'
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Shipments',
+        data: data.Value,  
+    }, 
+  ]
+
+    });
+
+  }
+        
+      });
+
+  }
+
+
+
+  // top_vendors //   
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/top_vendors',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           top_vendors(data);
+  //         }
+  //         });  
+  // });
+
+  function top_vendors () { 
+
+    $.ajax({
+        url: '/adminapp/top_vendors',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('top_vendors', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Top 10 Vendors'
+    },
+
+    xAxis: {
+        categories: data.Name 
+    }, 
+
+    yAxis: [{ 
+        title: {
+            text: 'Shipments'
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Shipments',
+        data: data.Value,
+    }, 
+  ]
+
+    });
+
+  }
+        
+      });
+
+  }
+
+
+
+  // top_couriers //   
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/top_couriers',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           top_couriers(data);
+  //         }
+  //         });  
+  // });
+
+  function top_couriers () { 
+
+    $.ajax({
+        url: '/adminapp/top_couriers',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('top_couriers', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Top 10 Couriers' 
+    },
+
+    xAxis: {
+        categories: data.Name 
+    },
+
+    yAxis: [{ 
+        title: {
+            text: 'Shipments'
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Shipments',
+        data: data.Value,
+    }, 
+  ]
+
+    });
+
+  }
+        
+      });
+
+  }
+
+
+
+
+  // top_cities //   
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/top_cities',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           top_cities(data);
+  //         }
+  //         });  
+  // });
+
+  function top_cities () { 
+
+    $.ajax({
+        url: '/adminapp/top_cities',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('top_cities', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Top 10 Cities'  
+    },
+
+    xAxis: {
+        categories: data.Name 
+    },
+
+    yAxis: [{ 
+        title: {
+            text: 'Shipments'
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Shipments',
+        data: data.Value,
+    }, 
+  ]  
+
+    });
+
+  }
+        
+      });
+
+  }
+
+
+
+
+  // order_vs_ships //   
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/order_vs_ships',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           order_vs_ships(data);
+  //         }
+  //         });  
+  // });
+
+  function order_vs_ships () { 
+
+    $.ajax({
+        url: '/adminapp/order_vs_ships',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('order_vs_ships', { 
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Orders vs Shipments'  
+    },
+
+    xAxis: {
+        categories: data.Name 
+    },
+
+    yAxis: [{ 
+        title: {
+            text: 'Orders vs Shipments' 
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Orders',
+        data: data.Orders,
+    }, 
+    {
+        name: 'Shipments',
+        data: data.Ships, 
+    }, 
+  ]  
+
+    }); 
+
+  }
+        
+      });
+
+  }
+
+
+
+
+  // top_products //   
+
+  // $(document).ready(function() { 
+  // $.ajax({
+  //         url: '/adminapp/top_products',  
+  //         type: 'GET',
+  //         async: true,
+  //         dataType: "json",
+  //         success: function (data) {
+  //           top_products(data);
+  //         }
+  //         });  
+  // });
+
+  function top_products () { 
+
+    $.ajax({
+        url: '/adminapp/top_products',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+  Highcharts.chart('top_products', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
+    },
+
+    title: {
+        text: 'Top 10 Products'   
+    },
+
+    xAxis: {
+        categories: data.Name 
+    },
+
+    yAxis: [{ 
+        title: {
+            text: 'Shipments'
+        }
+    }, 
+  ],
+
+    series: [{
+        name: 'Shipments',
+        data: data.Value,
+    }, 
+  ]  
+
+    });
+
+  }
+        
+      });
+
+  }
+
+
+
+
+
+  // cod_pre //   
+
+  // $(document).ready(function() {
+  //   $.ajax({
+  //           url: '/adminapp/cod_pre',   
+  //           type: 'GET',
+  //           async: true,
+  //           dataType: "json",
+  //           success: function (data) { 
+  //             cod_pre(data);
+  //           }
+  //           });  
+  //   });
+
+    function cod_pre () {
+
+    $.ajax({
+        url: '/adminapp/cod_pre',  
+        type: 'GET',
+        async: true,
+        crossDomain: true,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            console.log(data); 
+
+        // // Rename code
+        // let dd = d.map( x => { return {"name" : x.Name, "y":x.CTC} }); 
+        // console.log(dd); 
+        // // ////////////
+
+    Highcharts.chart('cod_pre', { 
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'COD vs Prepaid'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y} Shipments</b>'
+    },
+    accessibility: {
+        point: {
+        valueSuffix: ''
+        }
+    },
+    plotOptions: {
+        pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.y} Shipments'
+        }
+        }
+    },
+    series: [{
+        name: 'Shipments', 
+        colorByPoint: true,
+        data: data,
+    }]
+    });
+
+  }
+        
+      });
+
+    } 
+
+
+
+
+  </script>
+
+
+
+
+
+
+
+  <script> 
+
+    // datatable
+    $(document).ready( function () { 
+  
+        const menuItem = document.querySelectorAll(".mainmenu li");
+        menuItem[1].className = "active"; 
+    }); 
+    // datatable
+  
+  </script>
+  
+  
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<title>Employee Details - Sourceinfi Analytics</title> 
+
+<div class="sectioncust" style="margin-top:30px;"> 
+  <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h4 class="m-0 font-weight-bold text-info">Employee Details</h4> 
+          </div>
+          <div class="card-body" style="max-height: 600px;"> 
+              <div style="overflow: scroll; max-height: 570px;">                  
+    
+                  {% if d|length  %}                    
+                  
+                  {%for i in d%}       
+                  <form action='/admin/editemployee/{{ i[2] }}' method='POST'> 
+                
+                  <table class="table table-bordered table-light">
+
+                    <thead>
+                      <tr>
+                          <th>Name</th> 
+                          <th>Email</th> 
+                          <th>Type</th> 
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <tr> 
+                          <td><input readonly type="text" name="name" id="name" value={{i[1]}} ></td>
+                          <td><input readonly type="text" name="email" id="email" value={{i[2]}} ></td>
+                          <td>
+                              <input value={{i[4]}} name="type" list="type" />
+                              <datalist id="type">
+                                <option value="employee">Employee</option> 
+                                <option value="admin">Admin</option>
+                              </datalist> 
+
+                              <!-- <input value={{i[4]}} id="type" name="type">                         
+                              <select id="type">
+                                <option value="employee">Employee</option> 
+                                <option value="admin">Admin</option>
+                              </select> -->
+
+                          </td>
+
+                      </tr>                
+                    </tbody>
+
+                  </table>
+
+
+                    <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                          <th>Sales</th>
+                          <th>Operations</th>
+                          <th>Finance</th>
+                          <th>Vendor</th>      
+                          <th>Logistics</th>
+                          <th>Admin</th>   
+                          <th>Action</th>             
+                      </tr> 
+                    </thead>
+                    
+                    <tbody>
+                      <tr> 
+                          <td><input required style="max-width: 50%;" type="text" name="sales" id="sales" value={{i[5]['sales']}}></td>
+                          <td><input required style="max-width: 50%;" type="text" name="operations" id="operations" value={{i[5]['operations']}} ></td>
+                          <td><input required style="max-width: 50%;" type="text" name="finance" id="finance" value={{i[5]['finance']}} ></td>
+                          <td><input required style="max-width: 50%;" type="text" name="vendor" id="vendor" value={{i[5]['vendor']}} ></td>
+                          <td><input required style="max-width: 50%;" type="text" name="logistics" id="logistics" value={{i[5]['logistics']}} ></td>
+                          <td><input required style="max-width: 50%;" type="text" name="admin" id="admin" value={{i[5]['admin']}} ></td>
+                          <td>
+                            <input class="btn btn-success btn-sm" type="submit">
+                            <a class="btn btn-info btn-sm" href='/'>Discard</a>
+                          </td>
+                    </tr>                      
+                    </tbody>
+
+                  </table>
+                         
+                  {%endfor%}
+                  
+                  {% endif %}  
+                                  
+              </div>
+          </div>
+      </div>
+  </div>
+</div>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    <div class="content container-fluid"> 
+
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Employee Details:</h3>
+                </div>
+            </div>
+        </div>
+    <div>
+    
+    {% if d|length  %}    
+        <br></br>
+        
+        
+        {%for i in d%}       
+        <form action='/admin/editemployee/{{ i[2] }}' method='POST'>
+        
+        
+            <p>
+                <input class="btn btn-info btn-sm" type="submit">
+                <a class="btn btn-info btn-sm" href='/'>Discard</a> 
+            </p>
+          
+          
+                    
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text"    name="name" class="form-control-plaintext" id="name" value={{i[1]}} >
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email ID</label>
+            <div class="col-sm-10">
+              <input type="text" readonly  name="email"   class="form-control-plaintext" id="email" value={{i[2]}}>
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+              <input type="text"    name="type" class="form-control-plaintext" id="type" value={{i[4]}} >
+            </div>
+          </div>
+          <br></br>
+          <br></br>
+          <h3>Permissions</h3>
+
+          <div class="form-group row">
+            <label for="sales" class="col-sm-2 col-form-label">Sales</label>
+            <div class="col-sm-10">
+              <input type="text" name="sales" class="form-control-plaintext" id="sales" value={{i[5]['sales']}} >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="operations" class="col-sm-2 col-form-label">Operations</label>
+            <div class="col-sm-10">
+              <input type="text" name="operations" class="form-control-plaintext" id="operations" value={{i[5]['operations']}} >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="finance" class="col-sm-2 col-form-label">Finance</label>
+            <div class="col-sm-10">
+              <input type="text" name="finance" class="form-control-plaintext" id="finance" value={{i[5]['finance']}} >
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="vendor" class="col-sm-2 col-form-label">Vendor</label> 
+            <div class="col-sm-10">
+              <input type="text" name="vendor" class="form-control-plaintext" id="vendor" value={{i[5]['vendor']}} >
+            </div>
+          </div> 
+
+          
+          <div class="form-group row">
+            <label for="logistics" class="col-sm-2 col-form-label">Logistics</label>
+            <div class="col-sm-10">
+              <input type="text" name="logistics" class="form-control-plaintext" id="logistics" value={{i[5]['logistics']}} >
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="admin" class="col-sm-2 col-form-label">Admin</label> 
+            <div class="col-sm-10">
+              <input type="text" name="admin" class="form-control-plaintext" id="admin" value={{i[5]['admin']}} >
+            </div>
+          </div> 
+
+          
+               
+         {%endfor%}
+         
+        
+    
+        
+        
+        
+    {% endif %}   -->
+
+
+
+
+    
+{% endblock %}

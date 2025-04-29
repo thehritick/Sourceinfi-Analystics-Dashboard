@@ -1,0 +1,281 @@
+{% extends 'vendor_base.html' %}
+
+{% block body %}
+
+
+    <h1 style="text-align:center; margin-top: 50px;">Pickup Pendency & TAT</h1> 
+    <title>Pickup Pendency & TAT - Vendor</title>
+
+
+
+    <div class="sectioncust"> 
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4" >
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 100px;">
+
+                  <form style="display:inline" method="POST" action="" enctype="multipart/form-data">   
+                    <h5 style="margin-left: 15px;"><b>Filter Order Date:</b></h5>
+
+                    <div class="col-sm-3">
+                      <label for="Vendor_ID" style="margin-right: 30px;">Vendor_ID 
+                        <input type="number" name="Vendor_ID" id="Vendor_ID" placeholder="Vendor_ID" value= "{{Vendor_ID}}" /> 
+                      </label> 
+                    </div>
+
+                    <div class="col-sm-3">
+                      <label for="Start_Date" style="margin-right: 30px;">Start_Date
+                        <input type="date" name="Start_Date" id="Start_Date" placeholder="Start_Date" value= "{{Start_Date}}" /> 
+                      </label> 
+                    </div>
+
+                    <div class="col-sm-2"> 
+                      <label for="End_Date" style="margin-right: 10px;">End_Date
+                        <input type="date" name="End_Date" id="End_Date" placeholder="End_Date" value= "{{End_Date}}" />
+                      </label> 
+                    </div> 
+
+                      <a style="display:inline;" href="/vendorapp/pendency_tat" class="btn btn-sm btn-info float-right" role="button">Discard</a>
+                      <input style="display:inline; margin-right: 10px;" class="btn btn-sm btn-success float-right" role="button" type="submit">
+                      
+                  </form> 
+
+                  <a style="display:inline;" href="/vendorapp/pendency_tat_raw_data" class="btn btn-sm btn-dark float-right" role="button">Download Raw Data</a>
+
+              </div> 
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+    <div class="sectioncust" style="margin-top:30px;"> 
+      <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-info">Pickup vs Approval - TAT</h4> 
+                  <!-- <a style="display:inline" href="/vendorapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a> -->
+              </div>
+              <div class="card-body" style="max-height: 600px;"> 
+                  <div style="overflow: scroll; max-height: 570px;">
+                      {% if d1|length  %}
+                      <table class="table table-bordered table-light" id="myTable">
+
+                        <thead>
+                          <tr>
+                            {% for col in d1col %}
+                            <th style="text-align: center;">{{col}}</th>   
+                            {% endfor %}
+                          </tr> 
+                        </thead>
+                        
+                        <tbody>
+                          {%for i in d1%}
+                              <tr>
+                                {%for k in i%}
+                                    <td>{{ k }}</td>
+                                {%endfor%}
+                              </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
+                      {% endif %}    
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h4 class="m-0 font-weight-bold text-info">Pickup vs Order - TAT</h4> 
+                <!-- <a style="display:inline" href="/vendorapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a> -->
+            </div>
+            <div class="card-body" style="max-height: 600px;"> 
+                <div style="overflow: scroll; max-height: 570px;">
+                    {% if d2|length  %}
+                    <table class="table table-bordered table-light" id="myTable1">
+
+                      <thead>
+                        <tr>
+                          {% for col in d2col %}
+                          <th style="text-align: center;">{{col}}</th>   
+                          {% endfor %}
+                        </tr> 
+                      </thead>
+                      
+                      <tbody>
+                        {%for i in d2%}
+                            <tr>
+                              {%for k in i%}
+                                  <td>{{ k }}</td>
+                              {%endfor%}
+                            </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="sectioncust" style="margin-top:30px;"> 
+  <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h4 class="m-0 font-weight-bold text-info">Vendor - Pending Pickup</h4> 
+              <!-- <a style="display:inline" href="/vendorapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a> -->
+          </div>
+          <div class="card-body" style="max-height: 600px;"> 
+              <div style="overflow: scroll; max-height: 570px;">
+                  {% if d3|length  %}
+                  <table class="table table-bordered table-light" id="myTable2">
+
+                    <thead>
+                      <tr>
+                        {% for col in d3col %}
+                        <th style="text-align: center;">{{col}}</th>   
+                        {% endfor %}
+                      </tr> 
+                    </thead>
+                    
+                    <tbody>
+                      {%for i in d3%}
+                          <tr>
+                            {%for k in i%}
+                                <td>{{ k }}</td>
+                            {%endfor%}
+                          </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                  {% endif %}    
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="sectioncust" style="margin-top:30px;"> 
+  <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h4 class="m-0 font-weight-bold text-info">Seller - Pending Pickup</h4> 
+              <!-- <a style="display:inline" href="/vendorapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a> -->
+          </div>
+          <div class="card-body" style="max-height: 600px;"> 
+              <div style="overflow: scroll; max-height: 570px;">
+                  {% if d4|length  %}
+                  <table class="table table-bordered table-light" id="myTable3">
+
+                    <thead>
+                      <tr>
+                        {% for col in d4col %}
+                        <th style="text-align: center;">{{col}}</th>   
+                        {% endfor %}
+                      </tr> 
+                    </thead>
+                    
+                    <tbody>
+                      {%for i in d4%}
+                          <tr>
+                            {%for k in i%}
+                                <td>{{ k }}</td>
+                            {%endfor%}
+                          </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                  {% endif %}    
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="sectioncust" style="margin-top:30px;"> 
+  <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h4 class="m-0 font-weight-bold text-info">Product - Pending Pickup</h4> 
+              <!-- <a style="display:inline" href="/vendorapp/" class="btn btn-sm btn-success float-right" role="button">CSV</a> -->
+          </div>
+          <div class="card-body" style="max-height: 600px;"> 
+              <div style="overflow: scroll; max-height: 570px;">
+                  {% if d5|length  %}
+                  <table class="table table-bordered table-light" id="myTable4">
+
+                    <thead>
+                      <tr>
+                        {% for col in d5col %}
+                        <th style="text-align: center;">{{col}}</th>   
+                        {% endfor %}
+                      </tr> 
+                    </thead>
+                    
+                    <tbody>
+                      {%for i in d5%} 
+                          <tr>
+                            {%for k in i%}
+                                <td>{{ k }}</td>
+                            {%endfor%}
+                          </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                  {% endif %}    
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+  
+  // datatable 
+  $(document).ready( function () { 
+      // $('#myTable').DataTable({ 
+      // });
+
+      // $('#myTable1').DataTable({ 
+      // });
+
+      $('#myTable2').DataTable({ 
+      });
+
+      $('#myTable3').DataTable({ 
+      });
+
+      $('#myTable4').DataTable({ 
+      });
+
+      const menuItem = document.querySelectorAll(".mainmenu li");
+      menuItem[2].className = "active";  
+  }); 
+  // datatable
+
+</script>
+
+
+
+
+
+{% endblock %}
+
+
+
+

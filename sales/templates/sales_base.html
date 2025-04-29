@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">        
+        
+        <link rel="stylesheet" type="text/css" href="../../static/css/main.css"> 
+       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">       
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script> 
+
+
+        <div class="sidenav bg-dark">
+          <nav class="navigation">
+            <ul class="mainmenu">
+              <h2 style="margin-top: 5px; margin-bottom: 30px;"><a style="font-size: 22px; color: lightskyblue;" href="/home">Home</a></h2>
+              <li><h5>Sales</h5></li>
+              <li><a href="/salesapp/pendency_tat">Pending Pickup & TAT</a></li>  
+              <li><a href="/salesapp/fad_report">FAD Report</a></li>  
+              <li><a href="/salesapp/avg_margin_prod">SKU/ Product Delivery %</a></li>   
+              <li><a href="/salesapp/seller_perf">Seller Performance</a></li>  
+              <li><a href="/salesapp/referral">Referral Report</a></li>  
+              <li><a href="/salesapp/kam_performance">KAM Performance</a></li>
+              <li><a href="/salesapp/jit_tat">JIT - TAT</a></li> 
+              <li><a href="/salesapp/user_remarks">User Remarks</a></li> 
+
+              <!-- <li><a href="/salesapp/growth_report">Growth Report</a></li>    -->
+              <!-- <li><a href="/salesapp/dashboard">Dashboard</a></li>     -->
+
+            </ul>
+          </nav>
+        </div>
+
+        {% block head %} {% endblock %} 
+        
+    </head>
+
+    <body>
+        
+      <div class="main">
+
+        <div class="topnav">
+          <nav class="navbar navbar-dark bg-dark">            
+            <!-- <a href="/home" class="btn btn-info active" role="button" aria-pressed="true">HOME</a> -->
+            <a class="navbar-brand" href="/salesapp/">Sales Dashboard</a>  
+            <!-- <a  type="submit" class="btn btn-primary btn-sm float-right" href="/logout">Log Out</a> -->
+          </nav>
+        </div>
+
+        {% block body %}  {% endblock %}
+
+      </div>
+
+    </body>
+</html>
